@@ -22,8 +22,12 @@ path = os.getcwd() + "\\temp.jpg"
 try:
 	ctypes.windll.user32.SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0, path , 3)
 	print("Wallpaper set!")
-	os.remove(path)
-	print("Removed temp file")
+	val = input("Do you want to save the file?(y/n) ")
+	if(val == 'n' or val == 'N'):
+		os.remove(path)
+		print("Removed temp file")
+	else:
+		print("Cool")
 except Exception as e:
 	print("Some error occurred")
 	print(e)
