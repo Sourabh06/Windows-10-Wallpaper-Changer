@@ -5,6 +5,7 @@
 #include <windows.h>
 #pragma comment (lib, "urlmon.lib")
 #include <iostream>
+#include <tchar.h>      //Type + char
 
 using namespace std;
 
@@ -12,7 +13,8 @@ string ExePath();       //get current working directory
 
 int main()
 {
-    char * dwnld_URL = "https://source.unsplash.com/random/1920x1080";
+    TCHAR dwnld_URL[] = "https://source.unsplash.com/random/1920x1080";
+    TCHAR fname[] = "temp.jpg";
     typedef int * (*URLDownloadToFileA)(void*, char*, char*, DWORD, void*);
     HINSTANCE LibHnd = LoadLibrary("Urlmon.dll");
     URLDownloadToFileA URLDownloadToFile =  (URLDownloadToFileA) GetProcAddress(LibHnd, "URLDownloadToFileA");
@@ -20,7 +22,7 @@ int main()
     string path = ExePath() + "\\temp.jpg";
     try
     {
-        URLDownloadToFile(0, dwnld_URL, "temp.jpg", 0, 0);
+        URLDownloadToFile(0, dwnld_URL, fname, 0, 0);
         cout << "File Downloaded" << endl;
         cout << path << endl;
         SystemParametersInfo(SPI_SETDESKWALLPAPER, 0, (void*)path.c_str() , 3);
@@ -42,6 +44,7 @@ int main()
         else
             puts("Temporary file successfully deleted");
     }
+    system("pause");
     return 0;
 }
 
