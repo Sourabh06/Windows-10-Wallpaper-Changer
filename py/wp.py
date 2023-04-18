@@ -3,7 +3,7 @@ import ctypes
 import requests
 
 SPI_SETDESKWALLPAPER = 20 
-src = 'https://source.unsplash.com/random/1920x1080'
+src = 'https://source.unsplash.com/random/1920x1080?a'
 
 r = requests.head(src, allow_redirects=True)
 print("Source: " + r.url)
